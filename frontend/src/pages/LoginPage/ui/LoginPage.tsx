@@ -1,13 +1,15 @@
-import { Button, Container } from '@mantine/core';
+import { Flex } from '@mantine/core';
 
 import { RootLayout } from '@/app/layouts/RootLayout';
+
+import { AuthForm } from '@/widgets';
 
 export default function LoginPage() {
     return (
         <RootLayout>
-            <Container>
-                <Button>Some btn</Button>
-            </Container>
+            <Flex h='100vh' align='center' justify='center'>
+                <AuthForm />
+            </Flex>
         </RootLayout>
     );
 }

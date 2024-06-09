@@ -1,6 +1,6 @@
 import { PropsWithChildren, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { Loader } from '@mantine/core';
+import { Center, Loader } from '@mantine/core';
 import { jwtDecode } from 'jwt-decode';
 import { isNull } from 'lodash-es';
 
@@ -35,6 +35,8 @@ export const ProtectedRoute = ({ children }: PropsWithChildren) => {
                 }
                 setAuthorization(false);
             }
+        } else {
+            setAuthorization(true);
         }
     };
 
@@ -43,7 +45,11 @@ export const ProtectedRoute = ({ children }: PropsWithChildren) => {
     }, []);
 
     if (isNull(isAuthorized)) {
-        return <Loader />;
+        return (
+            <Center h='100vh'>
+                <Loader color='blue' />
+            </Center>
+        );
     }
 
     return isAuthorized ? children : <Navigate to='/login' />;
