@@ -22,7 +22,14 @@ export const AuthorizeService = BaseApi.enhanceEndpoints({
                 };
             },
         }),
+        signIn: build.mutation<{ access: string; refresh: string }, { username: string; password: string }>({
+            query: (body) => ({
+                url: API_ROUTES.auth,
+                method: HTTP_METHOD.POST,
+                body,
+            }),
+        }),
     }),
 });
 
-export const { useSendRefreshTokenMutation } = AuthorizeService;
+export const { useSendRefreshTokenMutation, useSignInMutation } = AuthorizeService;

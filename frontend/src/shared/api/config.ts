@@ -47,7 +47,7 @@ export const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, Fetch
                     const refresh = await baseQuery(
                         {
                             // TODO: тут надо поправить на актуальный
-                            url: '/iam/auth/refresh-token/',
+                            url: '/api/token/refresh/',
                             method: 'POST',
                             body: {
                                 refresh_token: STORAGE.getRefreshToken(),

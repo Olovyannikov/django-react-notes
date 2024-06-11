@@ -2,7 +2,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button, PasswordInput, Stack, TextInput } from '@mantine/core';
 import { zodResolver } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
-import { QueryStatus } from '@reduxjs/toolkit/query';
 
 import { useSendRegistrationMutation } from '@/shared/services/RegistrationService';
 import { isUserAlreadyExists } from '@/shared/types/type-guards/isUserAlreadyExists';
@@ -16,7 +15,7 @@ import {
 
 export const RegisterForm = () => {
     const navigate = useNavigate();
-    const [register, { status }] = useSendRegistrationMutation();
+    const [register] = useSendRegistrationMutation();
     const [isPasswordShown, { set: setIsPasswordShown }] = useShowPassword();
     const form = useRegisterForm({
         mode: 'uncontrolled',
@@ -32,14 +31,7 @@ export const RegisterForm = () => {
         const { password, username } = values;
         try {
             await register({ password, username }).unwrap();
-            if (status === QueryStatus.fulfilled) {
-                navigate('/login');
-            } else {
-                notifications.show({
-                    title: 'Что-то пошло не так',
-                    message: 'Повторите позже',
-                });
-            }
+            navigate('/login');
         } catch (error) {
             if (error instanceof Error) {
                 console.error(error);
@@ -55,9 +47,9 @@ export const RegisterForm = () => {
 
     return (
         <RegisterFormProvider form={form}>
-            <Stack>
+            <Stack gap={12}>
                 <form onSubmit={onSubmit}>
-                    <Stack miw='420'>
+                    <Stack miw='420' gap={12}>
                         <TextInput
                             autoFocus
                             {...form.getInputProps('username')}

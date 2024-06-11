@@ -2,6 +2,7 @@ import type { RouteProps } from 'react-router-dom';
 
 import { IndexPageLazy } from '@/pages/IndexPage';
 import { LoginPageLazy } from '@/pages/LoginPage';
+import LogoutPage from '@/pages/LogoutPage';
 import { NotFoundPageLazy } from '@/pages/NotFoundPage';
 import { RegisterPageLazy } from '@/pages/RegisterPage';
 import { ProtectedRoute } from '@/shared/ui';
@@ -11,6 +12,7 @@ export enum AppRoutes {
     NOT_FOUND = 'notFound',
     REGISTER = 'register',
     LOGIN = 'login',
+    LOGOUT = 'logout',
 }
 
 export const RouterPaths: Record<AppRoutes, string> = {
@@ -18,6 +20,7 @@ export const RouterPaths: Record<AppRoutes, string> = {
     [AppRoutes.INDEX]: '/',
     [AppRoutes.REGISTER]: '/register',
     [AppRoutes.LOGIN]: '/login',
+    [AppRoutes.LOGOUT]: '/logout',
 };
 
 export const routerConfig: Record<AppRoutes, RouteProps> = {
@@ -40,5 +43,9 @@ export const routerConfig: Record<AppRoutes, RouteProps> = {
     [AppRoutes.REGISTER]: {
         path: RouterPaths.register,
         element: <RegisterPageLazy />,
+    },
+    [AppRoutes.LOGOUT]: {
+        path: RouterPaths.logout,
+        element: <LogoutPage />,
     },
 };
